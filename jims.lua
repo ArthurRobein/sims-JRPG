@@ -46,7 +46,9 @@ function display_text_timer(main, anim)
    if anim.animation_frame > 30 then
       Canvas.wrapp(anim.wid):remove(anim.text)
       endAnimation(main, "txt_anim")
+      return Y_FALSE
    end
+   return Y_TRUE
 end
 
 function display_text(main, txt, x, y)
@@ -92,10 +94,14 @@ function jims_action(entity, eve, arg)
                 guy.current_id = 3
             elseif eve:key() == Y_UP_KEY or eve:key() == Y_DOWN_KEY then
 	            return_not_handle = true
-	        elseif eve:key() == Y_LEFT_KEY then
-	            move.left_right = -1
-	        elseif eve:key() == Y_RIGHT_KEY then
-	            move.left_right = 1
+            elseif eve:key() == Y_LEFT_KEY then
+                if guy.movable:to_int() == 0 then
+                    move.left_right = -1
+                end
+            elseif eve:key() == Y_RIGHT_KEY then
+                if guy.movable:to_int() == 0 then
+                    move.left_right = 1
+                end
             end
         elseif eve:type() == YKEY_UP then
             if eve:is_key_up() or eve:is_key_down() or eve:key() == Y_Z_KEY
@@ -184,6 +190,8 @@ function have_fun(entity)
     statAdd(main.guy, "hunger", -2)
     statAdd(main.guy, "bladder", -2)
     statAdd(main.guy, "energy", -2)
+    ySoundPlayLoop(Entity.wrapp(main).soundpft:to_int())
+
 end
 
 function eat(entity)
@@ -556,6 +564,7 @@ function swapToFight(entity)
    ywReplaceEntry(main, 0, fScreen:cent())
    cleanMenuAction(mainMenu)
    setMenuAction(mainMenu, "work", "jims.attack")
+   setMenuAction(mainMenu, "run away", "jims.house_time")
    jimsFSAddGuy(main, Canvas.wrapp(fScreen), widSize, badGuy)
 
    Entity.wrapp(main).guy.movable = 0
