@@ -61,6 +61,7 @@ function workAttackAnim(main, anim)
       fScreen.badGuy.attack(main:cent(), fScreen.badGuy:cent())
    end
 
+    print(yeGet(main:cent(), "soundhouse"))
    if anim.animation_frame > 10 then
       endAnimation(main, "cur_anim")
       if main.guy.hygien <= 0 then

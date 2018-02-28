@@ -292,16 +292,22 @@ function updateMainMenu(main, mainMenu)
 end
 
 function swapToHouse(entity)
-   local mainMenu = Entity.wrapp(ywCntWidgetFather(entity))
-   local main = ywCntWidgetFather(mainMenu:cent())
+    local mainMenu = Entity.wrapp(ywCntWidgetFather(entity))
+    local main = ywCntWidgetFather(mainMenu:cent())
 
-   Entity.wrapp(entity).next = Entity.wrapp(main).next
-   ywReplaceEntry(main, 0, Entity.wrapp(main).mainScreen:cent())
-   main = Entity.wrapp(main)
-   main.guy.movable = 1
-   cleanMenuAction(mainMenu)
-   updateMainMenu(main, mainMenu)
-   return YEVE_ACTION
+    Entity.wrapp(entity).next = Entity.wrapp(main).next
+    ywReplaceEntry(main, 0, Entity.wrapp(main).mainScreen:cent())
+    main = Entity.wrapp(main)
+    main.guy.movable = 1
+    print(main.currentmusic, main.soundhouse, yeGet(main:cent(), "soundhouse"))
+    if main.currentmusic ~= main.soundhouse then
+        ySoundPlayLoop(main.soundhouse:to_int())
+        main.currentmusic = main.soundhouse:to_int()
+    end
+    print(main.currentmusic)
+    cleanMenuAction(mainMenu)
+    updateMainMenu(main, mainMenu)
+    return YEVE_ACTION
 end
 
 function add_furniture(main, furn_type, t, rect, path, price, name)
@@ -543,6 +549,10 @@ function swapToFight(entity)
    badGuy.attack = Entity.new_func("attackOfTheWork")
 
    -- init combat
+   ySoundPlayLoop(Entity.wrapp(main).soundrequiem:to_int())
+   print(Entity.wrapp(main).soundhouse:to_int())
+   Entity.wrapp(main).currentmusic = Entity.wrapp(main).soundrequiem:to_int()
+   print(yeGet(main, "soundhouse"))
    ywReplaceEntry(main, 0, fScreen:cent())
    cleanMenuAction(mainMenu)
    setMenuAction(mainMenu, "work", "jims.attack")
@@ -635,6 +645,13 @@ function create_jims(entity)
    pushBar(statueBar, ent.guy, "energy")
    pushBar(statueBar, ent.guy, "hunger")
    pushBar(statueBar, ent.guy, "bladder")
+
+   -- music
+   ent.soundhouse = ySoundLoad("./house_music.mp3") 
+   ent.soundpft = ySoundLoad("./pft.mp3")
+   ent.soundcallgirl = ySoundLoad("./callgirl.mp3")
+   ent.soundrequiem = ySoundLoad("./rekuiemu.mp3")
+   ent.currentmusic = ent.soundcallgirl
 
    -- money
    local bypos = 4 + 20 * statueBar.ent.nbBar
