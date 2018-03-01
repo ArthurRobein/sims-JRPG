@@ -107,8 +107,11 @@ end
 
 function dmg_modifier(main)
     local dmg = 1
-    if main.guy.fun > 50 then dmg = 2
+    if main.guy.fun > 50 then dmg = dmg + 1
     end
+    if main.guy.hygien < 20 then dmg = dmg - 0.5
+    end
+    
     return dmg
 end
     

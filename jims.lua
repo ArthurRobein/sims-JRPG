@@ -257,7 +257,7 @@ function getNearObjectMask(main)
    if duistanceObjs(guy_can, main.shower) < 90 then
       ret = yOr(ret, near_shower)
    end
-   print(g_pos:to_string(), b_pos:to_string(), duistanceObjs(main.bed, guy_can))
+   --print(g_pos:to_string(), b_pos:to_string(), duistanceObjs(main.bed, guy_can))
    return ret
 end
 
@@ -307,12 +307,10 @@ function swapToHouse(entity)
     ywReplaceEntry(main, 0, Entity.wrapp(main).mainScreen:cent())
     main = Entity.wrapp(main)
     main.guy.movable = 1
-    print(main.currentmusic, main.soundhouse, yeGet(main:cent(), "soundhouse"))
     if main.currentmusic ~= main.soundhouse then
         ySoundPlayLoop(main.soundhouse:to_int())
         main.currentmusic = main.soundhouse:to_int()
     end
-    print(main.currentmusic)
     cleanMenuAction(mainMenu)
     updateMainMenu(main, mainMenu)
     return YEVE_ACTION
@@ -558,9 +556,7 @@ function swapToFight(entity)
 
    -- init combat
    ySoundPlayLoop(Entity.wrapp(main).soundrequiem:to_int())
-   print(Entity.wrapp(main).soundhouse:to_int())
    Entity.wrapp(main).currentmusic = Entity.wrapp(main).soundrequiem:to_int()
-   print(yeGet(main, "soundhouse"))
    ywReplaceEntry(main, 0, fScreen:cent())
    cleanMenuAction(mainMenu)
    setMenuAction(mainMenu, "work", "jims.attack")

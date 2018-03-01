@@ -27,8 +27,17 @@
 	"text-align": "center",
 	"action" : "nextOnKeyDown",
 	"background" : "rgba: 255 255 255 255",
-	"text" : "read to play !
-yay !
+	"text" : "
+
+
+Welcome to the ultimate life simulation (according to marketing)
+
+You got your first job and you just moved in by yourself
+for the first time.
+Things are a bit shabby for the moment but with a
+little work you will turn your flat in a 5 stars room!
+
+Have fun!
 
 (press enter to continue)",
 	"next" : "jims:game"
@@ -54,7 +63,7 @@ We love you anyway",
         "<type>" : "menu",
 	"entries" : [
 	    {
-		"text" : "Next Game",
+		"text" : "New Game",
 		"next" : "jims:start_txt",
 		"action" : "menuNext"
 	    },

@@ -120,7 +120,7 @@ function shop_buy(entity)
 				   newObj.furn.path:to_string(),
 				   newObj.furn.rect):cent()
    main[t].stat = newObj.furn.stat
-   print("realIdx", newObj.realIdx)
+   --print("realIdx", newObj.realIdx)
    main.cur_objs[t] = newObj.realIdx
    main.guy.money = main.guy.money - newObj.furn.price
    update_money(main)
@@ -152,9 +152,9 @@ function ware_cloth(entity)
    local invScreen = main.invScreen
    local obj = invScreen.posInfo[invScreen.current_pos:to_int()]
 
-   print("change to", obj.realIdx:to_int(),
-	 main.clothes[obj.realIdx:to_int()].resources,
-	 main.mainScreen.resources)
+   --print("change to", obj.realIdx:to_int(),
+	-- main.clothes[obj.realIdx:to_int()].resources,
+	 --main.mainScreen.resources)
    main.mainScreen.resources = main.clothes[obj.realIdx:to_int()].resources
    ywCanvasObjClearCache(main.guy.canvas:cent())
 end
